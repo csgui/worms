@@ -1,8 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <signal.h>
 #include <curses.h>
-#include <time.h>
 
 #include "worms.h"
 #include "timing.h"
@@ -18,8 +16,6 @@ int oldcur;
 int
 main(void)
 {
-    /* sets the seed which is used by rand to generate a random position for the worm food */
-    srand(time(NULL));
 
     /* game timing */
     initialize_timer();

@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <curses.h>
+#include <time.h>
+
 
 #include "worms.h"
 #include "helper.h"
@@ -186,6 +188,9 @@ void MoveWorm(void) {
 void PlaceFood(void) {
 
     int x, y;
+
+    /* sets the seed which is used by rand to generate a random position for the worm food */
+    srand(time(NULL));
 
     do {
         x = rand() % (cols - 3) + 1;
