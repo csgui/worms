@@ -2,7 +2,6 @@
 #include <curses.h>
 #include <time.h>
 
-
 #include "worms.h"
 #include "helper.h"
 

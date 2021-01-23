@@ -7,16 +7,12 @@
 #include "signaling.h"
 #include "helper.h"
 
-/* prototyping */
-void set_signals(void);
-
 WINDOW *mainwin;
 int oldcur;
 
 int
 main(void)
 {
-
     /* game timing */
     initialize_timer();
 
