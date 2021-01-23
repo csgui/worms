@@ -5,8 +5,9 @@
 #include <time.h>
 
 #include "worms.h"
-#include "helper.h"
 #include "timing.h"
+#include "signaling.h"
+#include "helper.h"
 
 /* prototyping */
 void set_signals(void);
@@ -20,11 +21,11 @@ main(void)
     /* sets the seed which is used by rand to generate a random position for the worm food */
     srand(time(NULL));
 
-    /* game timing setup */
+    /* game timing */
     initialize_timer();
 
-    /* set process signals */
-    set_signals();
+    /* game signaling */
+    initialize_signals();
 
     /* initialize ncurses */
     if ((mainwin = initscr()) == NULL) {
@@ -78,23 +79,4 @@ main(void)
 
     /*  We never get here  */
     return EXIT_SUCCESS;
-}
-
-/* game signaling set up  */
-void
-set_signals(void)
-{
-    struct sigaction sa;
-    sa.sa_handler = handler;
-    sa.sa_flags = 0;
-    sigemptyset(&sa.sa_mask);
-
-    /* set signal handlers */
-    sigaction(SIGTERM, &sa, NULL);
-    sigaction(SIGINT, &sa, NULL);
-    sigaction(SIGALRM, &sa, NULL);
-
-    /* ignore SIGTSTP */
-    sa.sa_handler = SIG_IGN;
-    sigaction(SIGTSTP, &sa, NULL);
 }
