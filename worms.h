@@ -3,9 +3,9 @@
 
 /* prototyping */
 void init_worm(void);
-void MoveWorm(void);
+void move_worm(void);
 void Draw(void);
-void FreeWorm(void);
+void free_worm(void);
 
 
 /*  Structures and typedefs  */

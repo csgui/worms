@@ -1,7 +1,10 @@
 #include <stdlib.h>
 #include <signal.h>
+#include <curses.h>
 
-#include "helper.h"
+#include "worms.h"
+
+void handler(int);
 
 void
 initialize_signals(void)
@@ -19,4 +22,27 @@ initialize_signals(void)
     /* ignore SIGTSTP */
     sa.sa_handler = SIG_IGN;
     sigaction(SIGTSTP, &sa, NULL);
+}
+
+void
+handler(int signum)
+{
+    extern WINDOW *mainwin;
+    extern int oldcur;
+
+    switch (signum) {
+    case SIGALRM:
+        /*  Received from the timer  */
+        move_worm();
+        return;
+    case SIGTERM:
+    case SIGINT:
+        /*  Clean up nicely  */
+        delwin(mainwin);
+        curs_set(oldcur);
+        endwin();
+        refresh();
+        free_worm();
+        exit(EXIT_SUCCESS);
+    }
 }

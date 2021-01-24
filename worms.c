@@ -88,7 +88,7 @@ void Draw(void) {
 
 /*  Moves the worm  */
 
-void MoveWorm(void) {
+void move_worm(void) {
 
     WORM * temp = worm;
     int x, y, ch;
@@ -248,7 +248,7 @@ void ChangeDir(int d) {
 
 /*  Releases memory used by worm  */
 
-void FreeWorm(void) {
+void free_worm(void) {
 
     WORM * temp = worm;
 

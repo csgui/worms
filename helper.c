@@ -22,7 +22,7 @@ void Error_Quit(char * msg) {
     curs_set(oldcur);
     endwin();
     refresh();
-    FreeWorm();
+    free_worm();
 
 
     /*  Output error message and exit  */
@@ -47,7 +47,7 @@ void Quit(int reason) {
     curs_set(oldcur);
     endwin();
     refresh();
-    FreeWorm();
+    free_worm();
 
 
     /*  Output farewell message  */
@@ -91,39 +91,4 @@ void GetTermSize(int * rows, int * cols) {
 
     *rows = ws.ws_row;
     *cols = ws.ws_col;
-}
-
-
-/*  Signal handler  */
-
-void handler(int signum) {
-
-    extern WINDOW * mainwin;
-    extern int oldcur;
-
-
-    /*  Switch on signal number  */
-
-    switch ( signum ) {
-
-    case SIGALRM:
-
-        /*  Received from the timer  */
-
-        MoveWorm();
-        return;
-
-    case SIGTERM:
-    case SIGINT:
-
-        /*  Clean up nicely  */
-
-        delwin(mainwin);
-        curs_set(oldcur);
-        endwin();
-        refresh();
-        FreeWorm();
-        exit(EXIT_SUCCESS);
-
-    }
 }
